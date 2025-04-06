@@ -1,0 +1,42 @@
+<!-- templates/layout.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Blog{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+
+<body>
+    <div class="banner">
+        <img src="{{ url_for('static', filename='images/banner/1.jpg') }}" alt="Banner 1">
+        <img src="{{ url_for('static', filename='images/banner/2.jpg') }}" alt="Banner 2">
+        <img src="{{ url_for('static', filename='images/banner/3.jpg') }}" alt="Banner 3">
+        <img src="{{ url_for('static', filename='images/banner/4.jpg') }}" alt="Banner 4">
+        <img src="{{ url_for('static', filename='images/banner/5.jpg') }}" alt="Banner 5">
+    </div>
+
+    <div class="navbar">
+        <a href="{{ url_for('main.home') }}">Home</a>
+        <a href="{{ url_for('main.blogs') }}">Blogs</a>
+        <a href="{{ url_for('main.videos') }}">Videos</a>
+        <a href="{{ url_for('main.audios') }}">Audios</a>
+        <a href="{{ url_for('main.news') }}">News</a>
+    </div>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="flash alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

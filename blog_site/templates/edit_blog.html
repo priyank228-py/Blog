@@ -1,0 +1,26 @@
+<!-- edit_blog.html template -->
+{% extends 'base.html' %}
+{% block title %}Edit Blog{% endblock %}
+
+{% block content %}
+<h2>Edit Blog Post</h2>
+<form method="POST">
+    <label>Title:</label><br>
+    <input type="text" name="title" value="{{ post.title }}" required><br><br>
+
+    <label>Content:</label><br>
+    <textarea name="content" rows="5" required>{{ post.content }}</textarea><br><br>
+
+    <label>Category:</label><br>
+    <select name="category" required>
+        <option value="blogs" {% if post.category=='blogs' %}selected{% endif %}>Blogs</option>
+        <option value="videos" {% if post.category=='videos' %}selected{% endif %}>Videos</option>
+        <option value="audios" {% if post.category=='audios' %}selected{% endif %}>Audios</option>
+        <option value="news" {% if post.category=='news' %}selected{% endif %}>News</option>
+    </select><br><br>
+
+    <button type="submit">Update Post</button>
+</form>
+
+<a href="{{ url_for('main.admin_dashboard') }}">← Back to Dashboard</a>
+{% endblock %}

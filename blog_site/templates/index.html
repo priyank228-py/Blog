@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="latest-blog">
+    <h2>{{ post.title }}</h2>
+    <div class="blog-content" id="blog-content">
+        {{ post.content[:500] }}{% if post.content|length > 500 %}...{% endif %}
+    </div>
+    {% if post.content|length > 500 %}
+    <a href="{{ url_for('main.view_blog', blog_id=post.id) }}" class="read-more">Read More</a>
+    {% endif %}
+</div>
+{% endblock %}
